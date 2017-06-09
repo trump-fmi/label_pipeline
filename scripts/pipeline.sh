@@ -5,7 +5,7 @@
 
 function quit {
 	cd ..
-#	rm -r $tmpDir
+	rm -r $tmpDir
 
 	exit $1
 }
