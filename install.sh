@@ -4,7 +4,8 @@
 mkdir bin
 
 # cp the scripts to the bin directory
-cp scripts/* bin
+cp scripts/pipeline.sh bin
+chmod +x bin/pipeline.sh
 
 # change into the bin directory and compile the binaries
 cd bin
