@@ -1,6 +1,6 @@
 [submodule "vendor/growing_balls"]
 	path = vendor/growing_balls
-	url = git@github.com:krumpefp/growing_balls.git
+	url = https://github.com/krumpefp/growing_balls.git
 [submodule "vendor/osm_input"]
 	path = vendor/osm_input
-	url = git@github.com:krumpefp/osm_input.git
+	url = https://github.com/krumpefp/osm_input.git
