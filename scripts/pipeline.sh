@@ -65,8 +65,7 @@ mkdir $tmpDir
 cd $tmpDir
 
 # perform the osm input
-# [BUG] add -tc 1 to prevent a bug in the osm_input software
-cmd="${osm_input_bin} -C ${config_file} -i ${osm_file} -tc 1"
+cmd="${osm_input_bin} -C ${config_file} -i ${osm_file}"
 echo "Executing the following command to import the pbf data:
 ${cmd}"
 eval $cmd
