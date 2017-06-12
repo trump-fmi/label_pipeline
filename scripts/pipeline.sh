@@ -11,29 +11,29 @@ function quit {
 }
 
 function help {
-  	echo "
-The following input is required to be provided:
-  (1) config.json	-   a config file to controll the input (json formated)
-  (2) input.osm.pbf	-   a osm .pbf file the data should be imported from
-"
+	echo "
+	The following input is required to be provided:
+	(1) config.conf	-   a config file to controll the input (json formated)
+	(2) input.osm.pbf	-   a osm .pbf file the data should be imported from
+	"
 }
 
 osm_input_bin="vendor/osm_input/osm_input"
 gb_bin="vendor/growing_balls/growing_balls"
 echo "
-  This shell script executes the pipeline to perform the following steps to
-  compute a label elimination order that allows for non overlapping label
-  visualization.
-  Please ensure that the following programms are compiled and available in the
-  current directory:
-    (1) ${osm_input_bin}		-  to read the osm data
-    (2) ${gb_bin}	-  to compute the elimination sequence
+This shell script executes the pipeline to perform the following steps to
+compute a label elimination order that allows for non overlapping label
+visualization.
+Please ensure that the following programms are compiled and available in the
+current directory:
+(1) ${osm_input_bin}		-  to read the osm data
+(2) ${gb_bin}	-  to compute the elimination sequence
 
 "
 
 if [ "${1} != "" ] && [ -e "${1}" ]
-   && [ "${2} != "" ] && [ -e "${2}" ]; then
-   	if [[ ${1} == *.pbf ]]; then
+	&& [ "${2} != "" ] && [ -e "${2}" ]; then
+	if [[ ${1} == *.pbf ]]; then
 		osm_file=${1}
 		config_file=${2}
 	else
@@ -52,8 +52,8 @@ config_file=$(realpath $config_file)
 # create a temporary folder to perform the actual computation
 tmpDir=".tmp"
 while [ -d  $tmpDir ]; do
-  read -e -p "${tmpDir} already exists.
-  Please specify a new temporary directory name >" tmpDir
+	read -e -p "${tmpDir} already exists.
+	Please specify a new temporary directory name >" tmpDir
 done
 
 # turn to absolute paths
@@ -68,7 +68,7 @@ cd $tmpDir
 # [BUG] add -tc 1 to prevent a bug in the osm_input software
 cmd="${osm_input_bin} -C ${config_file} -i ${osm_file} -tc 1"
 echo "Executing the following command to import the pbf data:
-  ${cmd}"
+${cmd}"
 eval $cmd
 
 cmplt=$(find . -name *.complete.txt)
@@ -80,15 +80,15 @@ fi
 # perform the computation of the elimination sequence
 cmd="${gb_bin} ${cmplt}"
 echo "Executing the following command to compute the elimination sequence:
-  ${cmd}"
+${cmd}"
 eval $cmd
 
-eo=$(find . -name *.eo)
+eo=$(find . -name *.ce)
 if [ ! -e "${eo}" ]; then
 	echo "Computing the elimination sequence did not stop as expected.\
-	      Aborting!"
+		Aborting!"
 	quit 1
 fi
 
-mv eo ..
+mv $eo ..
 quit 0
