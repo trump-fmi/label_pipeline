@@ -10,10 +10,12 @@ addons:
       - libcgal-qt5-dev
       - libcppunit-dev
       - libjsoncpp-dev
-      - fonts-dejavu
+      - ttf-dejavu
 
 before_install:
   - sudo ln -s /usr/include/jsoncpp/json/ /usr/include/json
+  - sudo mkdir -p /usr/share/fonts/TTF
+  - sudo ln -s /usr/share/fonts/truetype/ttf-dejavu/DejaVuSans.ttf /usr/share/fonts/TTF/DejaVuSansMono.ttf
 
 install:
   - ./install.sh
