@@ -1,0 +1,26 @@
+---
+language: cpp
+dist: bionic
+
+addons:
+  apt:
+    packages:
+      - protobuf-compiler
+      - libprotoc-dev
+      - libcgal-qt5-dev
+      - libcppunit-dev
+      - libjsoncpp-dev
+      - fonts-dejavu
+
+before_install:
+  - sudo ln -s /usr/include/jsoncpp/json/ /usr/include/json
+
+install:
+  - ./install.sh
+
+before_script:
+  - cd bin
+  - wget https://download.geofabrik.de/europe/germany/baden-wuerttemberg-latest.osm.pbf
+
+script:
+  - ./pipeline.sh ../config/example.conf ./baden-wuerttemberg-latest.osm.pbf
