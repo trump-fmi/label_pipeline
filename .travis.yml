@@ -26,3 +26,7 @@ before_script:
 
 script:
   - ./pipeline.sh ../config/example.conf ./baden-wuerttemberg-latest.osm.pbf
+
+after_script:
+  # Trigger Docker build of trump-label
+  - "curl -H \"Content-Type: application/json\" --data '{\"docker_tag\": \"latest\"}' -X POST https://cloud.docker.com/api/build/v1/source/3a93cd57-cf8c-47e3-9bbc-fbc3dd1ef820/trigger/b8e0353c-4058-4fce-896d-e479031a3d9b/call/"
